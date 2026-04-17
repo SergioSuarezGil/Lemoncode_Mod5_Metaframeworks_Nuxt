@@ -1,5 +1,5 @@
 import type { House } from '../types/house';
-import { parseHouse } from '../types/house.schema';
+import { mapHouse } from './house.mapper';
 
 const buildUrl = (baseUrl: string, path: string): string => {
   return `${baseUrl.replace(/\/$/, '')}${path}`;
@@ -13,7 +13,7 @@ export const housesService = {
       return [];
     }
 
-    return rawData.map((house) => parseHouse(house));
+    return rawData.map((house) => mapHouse(house));
   },
 
   async getById(baseUrl: string, id: string): Promise<House | null> {
@@ -23,6 +23,6 @@ export const housesService = {
       return null;
     }
 
-    return parseHouse(rawData);
+    return mapHouse(rawData);
   },
 };
